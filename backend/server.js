@@ -99,8 +99,8 @@ app.post("/api/login", async (req, res) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
       const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: "24h" });
-      const filePath = "./public/Game/Token/token.txt";
-      await fs.writeFile(filePath, token);
+      //const filePath = "./public/Game/Token/token.txt";
+      //await fs.writeFile(filePath, token);
 
       res.status(200).json({ message: "Login successful", token });
     } else {
