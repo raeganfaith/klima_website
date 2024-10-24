@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
+// const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
@@ -69,4 +70,11 @@ const UserSchema = new mongoose.Schema({
   },
 });
 
-module.exports = mongoose.model('User', UserSchema);
+// Product model, create a collection labelled as "Product" using the productSchema
+// The "Product" will automatically renamed to "products" in the MongoDB
+const User = mongoose.model("User", userSchema);
+
+// To use this in different files
+export default User;
+
+// module.exports = mongoose.model('User', UserSchema);
