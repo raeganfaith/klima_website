@@ -8,7 +8,7 @@ import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
 import crypto from "crypto";
 import fs from "fs/promises";
-import jwt from "jsonwebtoken";  // Import jwt
+import jwt from "jsonwebtoken"; 
 dotenv.config();
 
 const otpStore = {};
@@ -99,10 +99,16 @@ app.post("/api/login", async (req, res) => {
 
     if (user && (await bcrypt.compare(password, user.password))) {
       const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: "24h" });
-      //const filePath = "./public/Game/Token/token.txt";
-      //await fs.writeFile(filePath, token);
+      const filePath = "./frontend/public/Game/Token/token.txt"; 
 
-      res.status(200).json({ message: "Login successful", token });
+      try {
+        await fs.mkdir("./public/Game/Token", { recursive: true });
+        await fs.writeFile(filePath, token, "utf8");
+        res.status(200).json({ message: "Login successful", token });
+      } catch (fileError) {
+        console.error("Failed to write token to file:", fileError);
+        res.status(500).json({ message: "Server error: unable to save token" });
+      }
     } else {
       res.status(401).json({ message: "Invalid credentials" });
     }

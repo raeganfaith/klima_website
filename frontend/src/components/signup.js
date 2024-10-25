@@ -131,7 +131,7 @@ const Signup = () => {
                 <button type="submit" className="signupbtn">
                   <img src={arrow} alt="Arrow" />
                 </button>
-                <p className="login_btn"><a href="/">ALREADY HAVE AN ACCOUNT?</a></p>
+                <p className="login_btn"><a href="/login">ALREADY HAVE AN ACCOUNT?</a></p>
               </form>
             </div>
           </section>

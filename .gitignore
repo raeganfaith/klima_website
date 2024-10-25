@@ -9,7 +9,7 @@
 /node_modules
 /.env
 .vscode/extensions.json
-.frontend/node_modules
+/frontend/node_modules
 
 # testing
 /coverage

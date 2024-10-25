@@ -1,0 +1,233 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+}
+
+body,
+html {
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #8eb635;
+}
+
+.background_homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; 
+  background-color: #f0f0f0; 
+}
+
+.centered_container {
+  text-align: center;
+  background-image: url("../img/klima\ bg.png"); 
+  background-size: cover; 
+  background-position: center;
+  min-height: 100vh; 
+  width: 100vw; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+}
+
+.title_img {
+  margin-top: -100px;
+  width: 600px;
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: 25px;
+  color: white;
+}
+
+/*download button*/
+.dl_button {
+  margin-top: 50px;
+  border: none; 
+  background: transparent; 
+  cursor: pointer;
+  outline: none; 
+  position: relative; 
+  z-index: 3;
+}
+
+.button_img {
+  width: 300px; 
+  height: auto; 
+  transition: transform 0.3s ease; 
+}
+
+.dl_button:hover .button_img {
+  transform: scale(1.1);
+}
+
+.main_container {
+  position: absolute;
+  background-image: url("../img/klima\ bg\ 2.png"); 
+  background-size: cover; 
+  background-position: center;
+  background-position: top;
+  top: 650px;
+  min-height: 100vh; 
+  width: 100vw; 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center; 
+  z-index: 1;
+}
+
+/* HOMEPAGE - Game Info */
+
+.game_info {
+  margin-top: 70%;
+  padding: 40px 20px; 
+  text-align: center;  
+  background-color: #f9f9f9;
+  border-radius: 8px; 
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+  width: 90%; 
+  max-width: 800px; 
+}
+
+/* HOMEPAGE - Game title and description */
+.game_title {
+  font-size: 2em;
+  margin-bottom: 20px; 
+}
+
+.game_description {
+  font-size: 1em;
+  line-height: 1.5; 
+}
+
+.about_us {
+  margin-top: 10%;
+  padding: 40px 0;
+  text-align: center;
+  background-color: #f9f9f9;
+}
+
+.section_title {
+  font-size: 2.5em;
+  margin-bottom: 30px;
+  color: #4a4a4a;
+}
+
+.developer_profiles {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.developer_card {
+  width: 220px;
+  text-align: center;
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.developer_photo {
+  width: 100%;
+  height: auto;
+  border-radius: 50%;
+  margin-bottom: 10px;
+}
+
+.developer_name {
+  font-size: 1.2em;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.developer_role, .developer_bio {
+  font-size: 0.9em;
+  color: #666;
+}
+
+.partners_section {
+  margin-top: 10%;
+  margin-bottom: 20%;
+  padding: 40px 0;
+  text-align: center;
+  background-color: #e0e0e0;
+}
+
+.partner_card {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.partner_logo {
+  width: 150px;
+  height: auto;
+  margin-bottom: 10px;
+}
+
+.partner_info {
+  font-size: 1em;
+  color: #333;
+}
+
+/* FOOTER */
+.footer {
+  position: absolute; 
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  text-align: center;
+  padding: 10px 0; 
+  z-index: 2;
+}
+
+.footer_container {
+  max-width: 1200px; /* Adjust width as needed */
+  margin: 0 auto;
+}
+
+.footer_copy {
+  color: white; 
+  font-weight: bold;
+}
+
+/* LOGOS */
+.bottom_left {
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  width: 70px; 
+  height: 50px;
+}
+
+.bottom_right, .bottom_mid {
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  width: 100p; 
+  height: 50px;
+}
+
+.bottom_left, .bottom_right {
+  margin: 10px;
+}
+
+.top_left {
+  margin: 80px 4% 0 0; /* Margin adjustments */
+  width: 140px; 
+  height: 90px;
+}

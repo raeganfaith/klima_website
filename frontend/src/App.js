@@ -5,12 +5,14 @@ import Signup from './components/signup';
 import ForgotPassword from './components/forgotpass';
 import ChangePassword from './components/changepass';
 import Game from './components/game';
+import Homepage from './components/homepage';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<Login />} />
+      <Route path="/" element={<Homepage />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgotpass" element={<ForgotPassword />} />
         <Route path="/changepass" element={<ChangePassword />} />
