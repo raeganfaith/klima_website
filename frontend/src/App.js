@@ -6,6 +6,7 @@ import ForgotPassword from './components/forgotpass';
 import ChangePassword from './components/changepass';
 import Game from './components/game';
 import Homepage from './components/homepage';
+import DownloadPage from './components/download-page';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/forgotpass" element={<ForgotPassword />} />
         <Route path="/changepass" element={<ChangePassword />} />
+        <Route path="/downloadpage" element={<DownloadPage />} />
         <Route path="/game" element={<Game />} />
       </Routes>
     </Router>

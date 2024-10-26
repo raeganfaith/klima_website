@@ -8,7 +8,7 @@ import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
 import crypto from "crypto";
 import fs from "fs/promises";
-import jwt from "jsonwebtoken"; 
+import jwt from "jsonwebtoken";
 dotenv.config();
 
 const otpStore = {};
@@ -84,36 +84,47 @@ app.post("/api/signup", async (req, res) => {
   }
 });
 
-// Login Route
-app.post("/api/login", async (req, res) => {
+// Login 
+app.post('/api/login', async (req, res) => {
   const { emailOrUsername, password } = req.body;
 
+  // Check if fields are provided
   if (!emailOrUsername || !password) {
-    return res.status(400).json({ message: "All fields are required" });
+    return res.status(400).json({ message: 'All fields are required' });
   }
 
   try {
-    const user = await User.findOne({
-      $or: [{ email: emailOrUsername }, { username: emailOrUsername }],
+    // Find user by email or username
+    const user = await User.findOne({ 
+      $or: [{ email: emailOrUsername }, { username: emailOrUsername }] 
     });
 
-    if (user && (await bcrypt.compare(password, user.password))) {
-      const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: "24h" });
-      const filePath = "./frontend/public/Game/Token/token.txt"; 
+    // Check if user exists and if password matches
+    if (user && await bcrypt.compare(password, user.password)) {
+      // Create token with user ID
+      const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '24h' });
 
-      try {
-        await fs.mkdir("./public/Game/Token", { recursive: true });
-        await fs.writeFile(filePath, token, "utf8");
-        res.status(200).json({ message: "Login successful", token });
-      } catch (fileError) {
-        console.error("Failed to write token to file:", fileError);
-        res.status(500).json({ message: "Server error: unable to save token" });
-      }
+      // Respond with success message and token
+      res.status(200).json({ message: 'Login successful', token });
     } else {
-      res.status(401).json({ message: "Invalid credentials" });
+      res.status(401).json({ message: 'Invalid credentials' });
     }
   } catch (error) {
-    res.status(500).json({ message: "Server error" });
+    console.error('Error:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
+// Get user data
+app.get('/api/user', authenticateToken, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.userId).select('-password'); // Exclude the password
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to fetch user data' });
   }
 });
 

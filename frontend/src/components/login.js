@@ -31,13 +31,11 @@ const Login = () => {
         if (data.token) {
           // Store the token in sessionStorage
           sessionStorage.setItem('token', data.token);
-          // Optionally store the username or other info if needed
-          sessionStorage.setItem('username', data.username);
-
-          // Redirect to the desired page
+          
+          // Redirect to the desired page after a brief loading state
           setTimeout(() => {
             setIsLoading(false);
-            window.location.href = '/game'; 
+            window.location.href = '/downloadpage';
           }, 1000);
         } else {
           setError('Invalid credentials or token not found.');
@@ -106,9 +104,9 @@ const Login = () => {
           <footer className="footer">
             <div className="footer_container">
               <p className="footer_copy">&#169; KLIMA 2024 | All rights reserved.</p>
-              <img src={gp} alt="Bottom Left" className=" bottom_left" />
-              <img src={rerend} alt="Bottom Left" className=" bottom_mid" />
-              <img src={klimalogo} alt="Bottom Right" className=" bottom_right" />
+              <img src={gp} alt="Bottom Left" className="bottom_left" />
+              <img src={rerend} alt="Bottom Mid" className="bottom_mid" />
+              <img src={klimalogo} alt="Bottom Right" className="bottom_right" />
             </div>
           </footer>
         </div>

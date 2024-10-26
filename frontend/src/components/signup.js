@@ -63,7 +63,7 @@ const Signup = () => {
         // Hide modal and navigate after a delay
         setTimeout(() => {
           setIsModalOpen(false);
-          navigate('/');
+          navigate('/login');
         }, 3000); // Modal will disappear after 3 seconds
       } else if (data.message === 'Username is taken') {
         setUsernameError('Username is already taken.');

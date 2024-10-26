@@ -16,7 +16,7 @@ html {
   background-color: #7da02e;
 }
 
-.background_homepage {
+.background_download {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,6 +36,17 @@ html {
   flex-direction: column; 
   align-items: center; 
   justify-content: center; 
+}
+
+.profile {
+    position: absolute;
+    z-index: 0;
+    margin-left: 90%;
+    margin-top: 2%;
+}
+
+.profile_icon {
+    width: 100px;
 }
 
 .title_img {
