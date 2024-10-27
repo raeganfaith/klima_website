@@ -21,7 +21,7 @@ html {
     padding: 100px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    background-color: rgba(223, 223, 223, 0.92);
+    background-color: #E0DECA;
     margin: auto;
     position: absolute;
     top: 45%;
@@ -32,7 +32,7 @@ html {
 .change_pass_title {
     margin-bottom: 16px;
     font-size: 24px;
-    color: #333;
+    color: #197134;
 }
 
 .change_pass_instruction {
@@ -80,7 +80,7 @@ html {
     margin-top: 5%;
     border: none;
     border-radius: 5px;
-    background-color: #828282;
+    background-color: #197134;
     font-weight: 600;
     color: #fff;
     font-size: 16px;
@@ -89,7 +89,7 @@ html {
 }
 
 .change_pass_button:hover {
-    background-color: #505050;
+    background-color: #7da02e;
     transition: 0.2s;
 }
 
@@ -121,7 +121,7 @@ html {
 }
 
 .changepass_modal_close {
-    background-color: #828282;
+    background-color: #197134;
     color: white;
     border: none;
     padding: 20px 40px;
@@ -134,6 +134,6 @@ html {
 }
 
 .changepass_modal_close:hover {
-    background-color: #505050;
+    background-color: #7da02e;
     transition: 0.2s;
   }

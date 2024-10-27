@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import loading from '../img/earth.gif';
 import arrow from '../img/arrow.png';
-import klimalogo from '../img/klima logo.png';
-import klimatxt from '../img/klima text.png';
-import rerend from '../img/rerend logo.png';
-import gp from '../img/gp logo.png';
 import '../css/login.css';
 
 const Login = () => {
@@ -54,7 +50,6 @@ const Login = () => {
 
   return (
     <div className="background_login">
-      <img src={klimatxt} alt="Top Left" className="corner_img top_left" />
       {isLoading ? (
         <div className='loading_container'>
           <div className="loading_screen">
@@ -101,14 +96,7 @@ const Login = () => {
               </div>
             </section>
           </main>
-          <footer className="footer">
-            <div className="footer_container">
-              <p className="footer_copy">&#169; KLIMA 2024 | All rights reserved.</p>
-              <img src={gp} alt="Bottom Left" className="bottom_left" />
-              <img src={rerend} alt="Bottom Mid" className="bottom_mid" />
-              <img src={klimalogo} alt="Bottom Right" className="bottom_right" />
-            </div>
-          </footer>
+
         </div>
       )}
     </div>

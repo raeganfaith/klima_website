@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import profile from '../img/profile icon.png';
+import scroll from '../img/scroll.svg';
 import klimalogo from '../img/klima logo.png';
 import hklimatxt from '../img/klima text.png';
 import rerend from '../img/rerend logo.png';
 import gp from '../img/gp logo.png';
 import gp2 from '../img/gp logo 2.png';
 import download from '../img/download btn.png';
+import download2 from '../img/download btn 2.png';
 import developer1 from '../img/devs/shannen.png';
 import developer2 from '../img/devs/vinnie.png';
 import developer3 from '../img/devs/mane.png';
@@ -56,119 +57,121 @@ function DownloadPage() {
         fetchUserData();
     }, [token]);
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
-
     return (
-        <div className="background_homepage">
+        <div className="background_download">
+            <div className="dcentered_container">
 
-            <div className='profile'>
-                <img src={profile} alt="Profile Icon" className="profile_icon" />
-                <h1>Hello {user ? user.username : 'User'}</h1> {/* Display username if available */}
-            </div>
-            
-            <div className="centered_container">
-            
-                <img src={hklimatxt} alt="KLIMA Logo" className="title_img" />
-                <h1 className='subtitle'>Act Now for Nature – A Future Worth Protecting</h1>
+                <img src={hklimatxt} alt="KLIMA Logo" className="dtitle_img" />
+                <h1 className='dsubtitle'>Act Now for Nature – A Future Worth Protecting</h1>
 
                 {/* Download Button */}
-                <button className="dl_button" onClick={openDownloadModal}>
-                    <img src={download} alt="Download" className="button_img" />
+                <button className="ddl_button" onClick={openDownloadModal}>
+                    <img src={download} alt="Download" className="dbutton_img" />
                 </button>
+
+                <div className='dscroll'>
+                    <img src={scroll} alt="Scroll" className="hscroll_img" />
+                </div>
             </div>
 
             {/* Download Modal */}
             {isDownloadModalOpen && (
-                <div className="modal">
-                    <div className="modal_content">
-                        <span className="close" onClick={closeDownloadModal}>&times;</span>
-                        <h2>Download KLIMA</h2>
-                        <p>Thank you for your interest in downloading KLIMA. Click the link below to proceed.</p>
-                        <a href="/path-to-your-download-file" className="download_link">Download Now</a>
+                <div className="dmodal">
+                    <div className="dmodal_content">
+                        <span className="dclose" onClick={closeDownloadModal}>&times;</span>
+                        <h2 className='dmodal_title'>Welcome, <strong>{user ? user.username : 'User'}</strong> !</h2>
+                        <p className='dmodal_description'>
+                            You have successfully logged in with your account. Thank you for your interest in downloading <strong>KLIMA</strong>. Click the button below to proceed.
+                        </p>
+                        <a href="/Game/Klima Setup v1.1 (x64).exe" className="dlink" download>
+                            <img src={download2} alt="Download" className="dbutton_img" />
+                        </a>
                     </div>
                 </div>
             )}
 
+
+
             {/* Game Information Section */}
-            <div className="main_container">
-                <div className="game_info">
-                    <h2 className="game_title">About the Game</h2>
-                    <p className="game_description">
+            <div className="dmain_container">
+                <div className="dgame_info_section">
+                    <h2 className="dgame_title">About the Game</h2>
+                    <p className="dgame_description">
                         <strong>KLIMA</strong> invites you into a vibrant, 3D mini-world where every choice counts. As you explore this spherical environment, you’ll encounter real-life climate scenarios, like rising sea levels, deforestation, and pollution, that bring the challenges of climate change to life. It’s not just a game; it’s a journey to see the impact of your choices on the planet.
                     </p>
-                    <p className="game_description">
-                        Each level immerses you in a different climate situation, where fast decisions show the direct effects of your actions on this mini-world. You’ll gain insights into the ripple effects of climate issues—how one action can change everything. By learning from realistic scenarios based on real-world data, you’ll come away with a better understanding of how our everyday choices shape the environment around us.
+                    <br></br>
+                    <p className="dgame_description">
+                        Each level will put you in a different climate situation, where fast decisions show the direct effects of your actions on this mini-world. You’ll gain insights into the ripple effects of climate issues—how one action can change everything. By learning from realistic scenarios based on real-world data, you’ll come away with a better understanding of how our everyday choices shape the environment around us.
                     </p>
-                    <p className="game_description">
+                    <br></br>
+                    <p className="dgame_description">
                         In <strong>KLIMA</strong>, it’s all about learning through doing. You’ll walk away with a richer perspective on climate change, understanding both the issues and the solutions needed to make a difference.
                     </p>
                 </div>
 
                 {/* About Us Section */}
-                <div className="about_us">
-                    <h2 className="section_title">Meet Our Team</h2>
-                    <div className="developer_profiles">
+                <div className="dabout_us_section" id='aboutUs'>
+                    <h2 className="ddev_title">Meet Our Team</h2>
+                    <div className="ddeveloper_profiles">
 
-                        <div className="developer_card">
-                            <img src={developer1} alt="Developer 1" className="developer_photo dev1" />
-                            <h3 className="developer_name">Developer 1</h3>
-                            <p className="developer_role">Role: Lead Developer</p>
+                        <div className="ddeveloper_card">
+                            <img src={developer1} alt="Developer 1" className="ddeveloper_photo ddev1" />
+                            <h3 className="ddeveloper_name">Shannen</h3>
+                            <p className="ddeveloper_role">PROJECT MANAGER</p>
                         </div>
 
-                        <div className="developer_card">
-                            <img src={developer2} alt="Developer 2" className="developer_photo dev2" />
-                            <h3 className="developer_name">Developer 2</h3>
-                            <p className="developer_role">Role: UI/UX Designer</p>
+                        <div className="ddeveloper_card">
+                            <img src={developer2} alt="Developer 2" className="ddeveloper_photo ddev2" />
+                            <h3 className="ddeveloper_name">Vinnie</h3>
+                            <p className="ddeveloper_role">SYSTEM ADMINISTRATOR</p>
                         </div>
 
-                        <div className="developer_card">
-                            <img src={developer3} alt="Developer 3" className="developer_photo dev3" />
-                            <h3 className="developer_name">Developer 3</h3>
-                            <p className="developer_role">Role: Backend Developer</p>
+                        <div className="ddeveloper_card">
+                            <img src={developer3} alt="Developer 3" className="ddeveloper_photo ddev3" />
+                            <h3 className="ddeveloper_name">Jere Mane</h3>
+                            <p className="ddeveloper_role">BACKEND DEVELOPER</p>
                         </div>
 
-                        <div className="developer_card">
-                            <img src={developer4} alt="Developer 4" className="developer_photo dev4" />
-                            <h3 className="developer_name">Developer 4</h3>
-                            <p className="developer_role">Role: Project Manager</p>
+                        <div className="ddeveloper_card">
+                            <img src={developer4} alt="Developer 4" className="ddeveloper_photo ddev4" />
+                            <h3 className="ddeveloper_name">Kyan</h3>
+                            <p className="ddeveloper_role">FRONTEND DEVELOPER</p>
                         </div>
                     </div>
                 </div>
 
                 {/* Partner Section */}
-                <div className="partners_section">
-                    <h2 className="section_title">Our Partner</h2>
-                    <div className="partner_card">
-                        <img src={gp2} alt="Partner Logo" className="partner_logo" />
-                        <p className="partner_info">
+                <div className="dpartners_section" id='ourPartner'>
+                    <h2 className="dpartner_title">Our Partner</h2>
+                    <div className="dpartner_card">
+                        <img src={gp2} alt="Partner Logo" className="dpartner_logo" />
+                        <p className="dpartner_info">
                             Greenpeace is a community united by a mission to protect the planet and ensure a green, peaceful future. We’ve led the fight against environmental destruction, advocating for the planet’s rights as part of a global movement that challenges power with courage.
-                            <a className="gp_link" href="https://www.greenpeace.org/philippines/about-us/">Know more</a>
+                            &nbsp;<a className="dgp_link" href="https://www.greenpeace.org/philippines/about-us/">Know more</a>
                         </p>
                     </div>
                 </div>
 
                 {/* Footer */}
-                <footer className="hfooter">
-                    <div className="hfooter_container">
-                        <a href="#" className="footer_link" onClick={openPrivacyModal}>Privacy Policy</a>
-                        <a href="#" className="footer_link" onClick={openTermsModal}>Terms of Service</a>
-                        <a href="#" className="footer_link">About Us</a>
-                        <a href="#" className="footer_link">Our Partner</a>
-                        <p className="hfooter_copy">&#169; KLIMA 2024 | All rights reserved.</p>
-                        <img src={gp} alt="Bottom Left" className="bottom_left" />
-                        <img src={rerend} alt="Bottom Mid" className="bottom_mid" />
-                        <img src={klimalogo} alt="Bottom Right" className="bottom_right" />
+                <footer className="dfooter">
+                    <div className="dfooter_container">
+                        <a href="#" className="dfooter_link" onClick={openPrivacyModal}>Privacy Policy</a>
+                        <a href="#" className="dfooter_link" onClick={openTermsModal}>Terms of Service</a>
+                        <a href="#aboutUs" className="dfooter_link">About Us</a>
+                        <a href="#ourPartner" className="dfooter_link">Our Partner</a>
+                        <p className="dfooter_copy">&#169; KLIMA 2024 | All rights reserved.</p>
+                        <img src={gp} alt="Bottom Left" className="dbottom_left" />
+                        <img src={rerend} alt="Bottom Mid" className="dbottom_mid" />
+                        <img src={klimalogo} alt="Bottom Right" className="dbottom_right" />
                     </div>
                 </footer>
 
                 {/* Privacy Policy Modal */}
                 {isPrivacyModalOpen && (
-                    <div className="hmodal">
-                        <div className="hmodal_content">
-                            <span className="close" onClick={closePrivacyModal}>&times;</span>
-                            <div className="scrollable_content">
+                    <div className="dmodal">
+                        <div className="dmodal_content">
+                            <span className="fclose" onClick={closePrivacyModal}>&times;</span>
+                            <div className="dscrollable_content">
                                 <h1>Privacy Policy</h1>
                                 <p>
                                     KLIMA is dedicated to protecting the privacy of our users and ensuring a secure gaming experience. This Privacy Policy outlines the types of personal information we collect, how it is used, stored, and protected, as well as your rights regarding your data.
@@ -205,7 +208,7 @@ function DownloadPage() {
 
                                 <h2>6. User Rights:</h2>
                                 <p>
-                                    You have the right to access, correct, or delete any personal data we hold about you. If you wish to exercise these rights, please contact us at [Insert Contact Email].
+                                    You have the right to access, correct, or delete any personal data we hold about you. If you wish to exercise these rights, please contact us at <strong>klima.rerend@gmail.com</strong>.
                                 </p>
                                 <p>
                                     You also have the right to withdraw your consent at any time where we are relying on your consent to process your personal information.
@@ -231,10 +234,10 @@ function DownloadPage() {
 
                 {/* Terms of Service Modal */}
                 {isTermsModalOpen && (
-                    <div className="hmodal">
-                        <div className="hmodal_content">
-                            <span className="close" onClick={closeTermsModal}>&times;</span>
-                            <div className="scrollable_content">
+                    <div className="dmodal">
+                        <div className="dmodal_content">
+                            <span className="fclose" onClick={closeTermsModal}>&times;</span>
+                            <div className="dscrollable_content">
                                 <h1>Terms of Service</h1>
                                 <p>These Terms and Conditions govern your access to and use of <strong>KLIMA</strong>, an interactive game designed to educate players about climate change through engaging gameplay and real-world scenarios.</p>
 

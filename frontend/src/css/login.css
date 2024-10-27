@@ -33,7 +33,7 @@ html {
 .login_container {
   width: 700px;
   height: 800;
-  background-color: rgba(223, 223, 223, 0.92);
+  background-color: #E0DECA;
   padding: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
@@ -85,17 +85,17 @@ html {
 
 .forgotpass_btn a, .signup_btn a {
   font-weight: 600;
-  color: #828282;
+  color: #197134;
 }
 
 .forgotpass_btn a:hover,
 .signup_btn a:hover {
-  color: black;
+  color: 7da02e;
 }
 
 /* Style for submit button */
 .loginbtn {
-  background-color: #828282;
+  background-color: #197134;
   font-weight: 600;
   color: white;
   border: none;
@@ -109,7 +109,7 @@ html {
 }
 
 .loginbtn:hover {
-  background-color: #FFD02A;
+  background-color: #7da02e;
   transition: 0.2s;
 }
 
@@ -228,11 +228,8 @@ html {
 }
 
 .top_left {
-  top: 0;
-  left: 0;
-  margin: 80px;
-  margin-left: 4%;
-  width: 140px; 
-  height: 90px;
+  margin-top: -38%;
+  width: 200px; 
+  height: auto;
 }
 

@@ -7,6 +7,26 @@
   font-family: "Montserrat", sans-serif;
 }
 
+body {
+  overflow-y: scroll; 
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+body {
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
 body,
 html {
   height: 100%;
@@ -24,7 +44,7 @@ html {
   min-height: 100vh;
 }
 
-.centered_container {
+.dcentered_container {
   text-align: center;
   background-image: url("../img/klima\ main\ bg.png"); 
   background-size: cover; 
@@ -38,31 +58,65 @@ html {
   justify-content: center; 
 }
 
-.profile {
+@keyframes scrollIndicator {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.5;
+  }
+}
+
+.dscroll_img {
+  margin-top: 50%;
+  width: 60px;
+  animation: scrollIndicator 1.5s infinite ease-in-out;
+}
+
+@keyframes scrollIndicator {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.5;
+  }
+}
+
+.dscroll_img {
+  margin-top: 50%;
+  width: 60px;
+  animation: scrollIndicator 1.5s infinite ease-in-out;
+}
+
+.dprofile {
     position: absolute;
     z-index: 0;
     margin-left: 90%;
     margin-top: 2%;
 }
 
-.profile_icon {
+.dprofile_icon {
     width: 100px;
 }
 
-.title_img {
+.dtitle_img {
   margin-top: -30%;
   width: 400px;
 }
 
-.subtitle {
+.dsubtitle {
   font-weight: 400;
   font-size: 20px;
   color: white;
 }
 
 /*download button*/
-.dl_button {
-  margin-top: 15%;
+.ddl_button {
+  margin-top: 1%;
   border: none; 
   background: transparent; 
   cursor: pointer;
@@ -71,17 +125,17 @@ html {
   z-index: 3;
 }
 
-.button_img {
+.dbutton_img {
   width: 300px; 
   height: auto; 
   transition: transform 0.3s ease; 
 }
 
-.dl_button:hover .button_img {
+.ddl_button:hover .dbutton_img {
   transform: scale(1.1);
 }
 
-.main_container {
+.dmain_container {
   min-height: 100vh; 
   width: 100vw; 
   display: flex; 
@@ -93,23 +147,23 @@ html {
 
 /* HOMEPAGE - Game info */
 
-.game_info {
+.dgame_info_section {
   text-align: center;  
   margin-top: 2%;
-  padding: 300px 300px; 
+  padding: 100px 100px; 
   border-radius: 10px; 
   width: 100vw;  
 }
 
-.game_title {
+.dgame_title {
   color: #197134;
   font-size: 100px;
   margin-bottom: 5%; 
 }
 
-.game_description {
+.dgame_description {
   color: #FCF9C6;
-  font-size: 30px;
+  font-size: 20px;
   line-height: 2; 
   padding-left: 200px;
   padding-right: 200px;
@@ -117,7 +171,7 @@ html {
 
 /* HOMEPAGE - About us */
 
-.about_us {
+.dabout_us_section {
   margin-top: 2%;
   padding: 20px 20px;
   width: 100vw;  
@@ -125,22 +179,22 @@ html {
   background-color: #18161634;
 }
 
-.section_title {
+.ddev_title {
   margin-top: 5%;
   font-size: 100px;
   margin-bottom: 100px;
-  color: #181616;
+  color: #FCF9C6;
 }
 
-.developer_profiles {
+.ddeveloper_profiles {
   display: flex;
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.developer_card {
-  width: 450px;
+.ddeveloper_card {
+  width: 400px;
   margin-bottom: 5%;
   text-align: center;
   background: #FCF9C6;
@@ -149,21 +203,21 @@ html {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.developer_photo {
+.ddeveloper_photo {
   width: 200px;
   height: auto;
   border-radius: 50%;
   margin-bottom: 10px;
 }
 
-.developer_name {
+.ddeveloper_name {
   color: #424D0C;
-  font-size: 40px;
+  font-size: 30px;
   margin-bottom: 5%;
   font-weight: bold;
 }
 
-.developer_role {
+.ddeveloper_role {
   font-weight: 500;
   font-size: 20px;
   color: #666;
@@ -171,22 +225,29 @@ html {
 
 /* HOMEPAGE - Partners */
 
-.gp_link {
+.dgp_link {
   color: #197134;
 }
 
-.gp_link:hover {
+.dgp_link:hover {
   color: #7da02e;
 }
 
-.partners_section {
+.dpartners_section {
   margin-top: 10%;
   margin-bottom: 20%;
   padding: 40px 0;
   text-align: center;
 }
 
-.partner_card {
+.dpartner_title {
+  margin-top: 5%;
+  font-size: 100px;
+  margin-bottom: 100px;
+  color: #181616;
+}
+
+.dpartner_card {
   width: 1500px;
   margin: 0 auto;
   padding: 150px;
@@ -196,30 +257,30 @@ html {
   text-align: center;
 }
 
-.partner_logo {
-  width: 800px;
+.dpartner_logo {
+  width: 600px;
   height: auto;
   margin-bottom: 5%;
 }
 
-.partner_info {
-  font-size: 35px;
+.dpartner_info {
+  font-size: 20px;
   color: #333;
 }
 
 /* FOOTER */
 
-.footer_link {
+.dfooter_link {
   margin: 0 10px;
   color: #FFFFFF; 
   text-decoration: none;
 }
 
-.footer_link:hover {
+.dfooter_link:hover {
   text-decoration: underline;
 }
 
-.hfooter {
+.dfooter {
   background-color: #181616;
   width: 100%;
   text-align: center;
@@ -227,12 +288,12 @@ html {
   margin-top: auto;
 }
 
-.hfooter_container {
+.dfooter_container {
   max-width: 1200px;
   margin: 0 auto;
 }
 
-.hfooter_copy {
+.dfooter_copy {
   margin-top: 10%;
   margin-bottom: 2%;
   color: white;
@@ -240,7 +301,7 @@ html {
 }
 
 /* LOGOS */
-.bottom_left {
+.dbottom_left {
   bottom: 0;
   right: 0;
   margin: 10px;
@@ -248,7 +309,7 @@ html {
   height: 50px;
 }
 
-.bottom_right, .bottom_mid {
+.dbottom_right, .dbottom_mid {
   bottom: 0;
   right: 0;
   margin: 10px;
@@ -256,12 +317,85 @@ html {
   height: 50px;
 }
 
-.bottom_left, .bottom_right {
+.dbottom_left, .dbottom_right {
   margin: 10px;
 }
 
 /* MODAL */
-.hmodal {
+
+/* download */
+.dmodal {
+  display: flex;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+  
+.dmodal_content {
+  background-color: #E0DECA;
+  padding: 80px;
+  border-radius: 5px;
+  width: 100%;
+  max-width: 800px;
+  height: auto; 
+  position: relative;
+  line-height: 2;
+  display: flex; 
+  flex-direction: column; 
+  justify-content: center; 
+  align-items: center;
+  text-align: center;
+}
+
+.dmodal_title {
+  color: #197134;
+  font-size: 35px;
+}
+
+.dmodal_title strong {
+    color: #006837;
+    font-weight: bolder;
+}
+
+.dmodal_description {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+.dmodal_description strong {
+  font-size: 25px;
+  color: #7da02e;
+}
+
+.dbutton_img {
+  margin-top: 10%;
+  width: 300px; 
+  height: auto; 
+  transition: transform 0.3s ease; 
+}
+  
+.dlink:hover .dbutton_img {
+    transform: scale(1.1);
+}
+
+.dclose {
+  position: absolute;
+  top: -30px;
+  right: 10px;
+  font-size: 60px;
+  cursor: pointer;
+  color: #197134;
+}
+
+  
+/* footer */
+.dmodal {
   display: flex;
   position: fixed;
   z-index: 1000;
@@ -274,8 +408,8 @@ html {
   align-items: center;
 }
 
-.hmodal_content {
-  background-color: #fff;
+.dmodal_content {
+  background-color: #E0DECA;
   padding: 40px;
   border-radius: 5px;
   width: 100%;
@@ -287,7 +421,7 @@ html {
   flex-direction: column; 
 }
 
-.scrollable_content {
+.dscrollable_content {
   overflow-y: auto;
   flex-grow: 1; 
   padding-right: 10px; 
@@ -295,10 +429,30 @@ html {
   text-align: left;
 }
 
-.close {
+/* Customize the scrollbar in the modal */
+.dscrollable_content {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #197134 #E0DECA; 
+}
+
+.dscrollable_content::-webkit-scrollbar {
+  width: 8px; 
+}
+
+.dscrollable_content::-webkit-scrollbar-thumb {
+  background-color: #197134;
+  border-radius: 10px; 
+}
+
+.dscrollable_content::-webkit-scrollbar-track {
+  background-color: #E0DECA; 
+}
+
+.fclose {
   position: absolute;
-  top: -25px;
-  right: 10px;
-  font-size: 50px;
+  top: -35px;
+  right: 30px;
+  font-size: 60px;
   cursor: pointer;
+  color: #197134;
 }

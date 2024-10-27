@@ -24,16 +24,17 @@ html {
 }
 
 .signup_title {
+  color: #197134;
   margin-top: 10%;
   margin-right: 50%;
-  font-weight: 600;
+  font-weight: bold;
   font-size: 20px;
 }
 
 .signup_container {
   width: 700px;
   height: 800;
-  background-color: rgba(223, 223, 223, 0.92);
+  background-color: #E0DECA;
   padding: 30px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
@@ -58,7 +59,7 @@ html {
 
 /* Style for submit button */
 .signupbtn {
-  background-color: #828282;
+  background-color: #197134;
   font-weight: 600;
   color: white;
   border: none;
@@ -72,7 +73,7 @@ html {
 }
 
 .signupbtn:hover {
-  background-color: #FFD02A;
+  background-color: #7da02e;
   transition: 0.2s;
 }
 
@@ -88,11 +89,11 @@ html {
 
 .login_btn a {
   font-weight: 600;
-  color: #828282;
+  color: #197134;
 }
 
 .login_btn a:hover {
-  color: black;
+  color: #7da02e;
 }
 
 /* textbox */
@@ -168,6 +169,50 @@ html {
 
 .modal_close:hover {
   background-color: #505050;
+  transition: 0.2s;
+}
+
+.vmodal_phrase {
+  margin-bottom: 10%;
+}
+
+.otp-input-container {
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+}
+
+.otp-input {
+  width: 40px; /* Width of each input box */
+  height: 40px; /* Height of each input box */
+  margin: 0 5px; /* Space between input boxes */
+  text-align: center; /* Center the digit */
+  font-size: 18px; /* Adjust font size */
+  border: 1px solid #ccc; /* Add border */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.otp-input:focus {
+  border-color: #197134; /* Change border color on focus */
+  outline: none; 
+} 
+
+.verify_button{
+  background-color: #197134;
+  font-weight: 600;
+  color: white;
+  border: none;
+  padding: 20px 40px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 10%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.verify_button:hover {
+  background-color: #7da02e;
   transition: 0.2s;
 }
 

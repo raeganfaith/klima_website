@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import arrow from '../img/arrow.png';
 import { useNavigate } from 'react-router-dom';
-import klimalogo from '../img/klima logo.png';
-import klimatxt from '../img/klima text.png';
-import rerend from '../img/rerend logo.png';
-import gp from '../img/gp logo.png';
 import '../css/signup.css';
 
 const Signup = () => {
@@ -15,7 +11,9 @@ const Signup = () => {
   const [usernameError, setUsernameError] = useState('');
   const [passwordError, setPasswordError] = useState('');
   const [confirmPasswordError, setConfirmPasswordError] = useState('');
-  const [isModalOpen, setIsModalOpen] = useState(false); // State for modal visibility
+  const [isSignupModalOpen, setIsSignupModalOpen] = useState(false);
+  const [isOtpModalOpen, setIsOtpModalOpen] = useState(false);
+  const [otp, setOtp] = useState(Array(6).fill('')); // Initialize OTP array for 6 digits
   const navigate = useNavigate();
 
   const validatePassword = (password) => {
@@ -27,19 +25,17 @@ const Signup = () => {
     return lengthCheck && lowercaseCheck && uppercaseCheck && numberCheck && specialCharCheck;
   };
 
-  const handleSubmit = async (event) => {
+  const handleSignup = async (event) => {
     event.preventDefault();
     setUsernameError('');
     setPasswordError('');
     setConfirmPasswordError('');
 
-    // Check if passwords match
     if (password !== confirmPassword) {
       setConfirmPasswordError("Passwords do not match!");
       return;
     }
 
-    // Validate password strength
     if (!validatePassword(password)) {
       setPasswordError(
         "Password must be at least 8 characters long and include a mix of lowercase and uppercase letters, numbers, and special symbols."
@@ -57,14 +53,11 @@ const Signup = () => {
       const data = await response.json();
 
       if (response.ok) {
-        // Show modal on successful signup
-        setIsModalOpen(true);
-
-        // Hide modal and navigate after a delay
+        setIsSignupModalOpen(true);
         setTimeout(() => {
-          setIsModalOpen(false);
-          navigate('/login');
-        }, 3000); // Modal will disappear after 3 seconds
+          setIsSignupModalOpen(false);
+          setIsOtpModalOpen(true);
+        }, 3000);
       } else if (data.message === 'Username is taken') {
         setUsernameError('Username is already taken.');
       } else {
@@ -76,10 +69,43 @@ const Signup = () => {
     }
   };
 
+  const handleOtpVerification = async () => {
+    try {
+      const otpCode = otp.join(''); // Convert array to string
+      const response = await fetch('http://localhost:5000/api/verify-otp', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, otp: otpCode })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        setIsOtpModalOpen(false);
+        navigate('/login');
+      } else {
+        alert(`OTP verification failed: ${data.message}`);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('OTP verification failed. Please try again later.');
+    }
+  };
+
+  const handleOtpChange = (index, value) => {
+    if (/^\d*$/.test(value) && (value.length <= 1)) {
+      const newOtp = [...otp];
+      newOtp[index] = value;
+      setOtp(newOtp);
+      // Move to the next input if the current one is filled
+      if (value && index < otp.length - 1) {
+        document.getElementById(`otp-input-${index + 1}`).focus();
+      }
+    }
+  };
+
   return (
     <div className="background_signup">
-      <img src={klimatxt} alt="Top Left" className="corner_img top_left" />
-
       <div className="signup">
         <header className="header" id="header">
           <div className="logo_img"></div>
@@ -88,7 +114,7 @@ const Signup = () => {
         <main className="main">
           <section className="signup section" id="signup">
             <div className="signup_container">
-              <form className="signup_form" onSubmit={handleSubmit}>
+              <form className="signup_form" onSubmit={handleSignup}>
                 <h2 className="signup_title">SIGN UP</h2>
                 <input
                   type="text"
@@ -98,7 +124,6 @@ const Signup = () => {
                   onChange={(e) => setUsername(e.target.value)}
                   required
                 />
-                
                 <input
                   type="email"
                   className='email_txtbox'
@@ -123,10 +148,9 @@ const Signup = () => {
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   required
                 />
-                  {/* Display error */}
-                  {usernameError && <p className="error_text">{usernameError}</p>} 
-                  {passwordError && <p className="error_text">{passwordError}</p>}
-                  {confirmPasswordError && <p className="error_text">{confirmPasswordError}</p>}
+                {usernameError && <p className="error_text">{usernameError}</p>}
+                {passwordError && <p className="error_text">{passwordError}</p>}
+                {confirmPasswordError && <p className="error_text">{confirmPasswordError}</p>}
 
                 <button type="submit" className="signupbtn">
                   <img src={arrow} alt="Arrow" />
@@ -137,27 +161,40 @@ const Signup = () => {
           </section>
         </main>
 
-        <footer className="footer">
-          <div className="footer_container">
-            <p className="footer_copy">
-              &#169; KLIMA 2024 | All rights reserved.
-            </p>
-            <img src={gp} alt="Bottom Left" className=" bottom_left" />
-            <img src={rerend} alt="Bottom Left" className=" bottom_left" />
-            <img src={klimalogo} alt="Bottom Right" className=" bottom_right" />            
-          </div>
-        </footer>
-
-        {/* Modal for successful signup */}
-        {isModalOpen && (
+        {/* Signup success modal */}
+        {isSignupModalOpen && (
           <div className="modal">
             <div className="modal_content">
               <h3 className='modal_title'>Signup Successful!</h3>
-              <p className='modal_phrase'>Welcome, <strong>{username}!</strong> Redirecting to the log in page...</p>
+              <p className='modal_phrase'>Welcome, <strong>{username}!</strong> Redirecting to OTP verification...</p>
             </div>
           </div>
         )}
 
+        {/* OTP verification modal */}
+        {isOtpModalOpen && (
+          <div className="modal">
+            <div className="modal_content">
+              <h3 className='modal_title'>OTP Verification</h3>
+              <p className='vmodal_phrase'>Enter the OTP sent to <strong>{email}</strong>:</p>
+              <div className="otp-input-container">
+                {otp.map((digit, index) => (
+                  <input
+                    key={index}
+                    type="text"
+                    id={`otp-input-${index}`}
+                    value={digit}
+                    onChange={(e) => handleOtpChange(index, e.target.value)}
+                    maxLength={1}
+                    className="otp-input"
+                    placeholder=""
+                  />
+                ))}
+              </div>
+              <button className='verify_button' onClick={handleOtpVerification}>Verify OTP</button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

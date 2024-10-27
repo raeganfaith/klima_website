@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import scroll from '../img/scroll.svg';
 import klimalogo from '../img/klima logo.png';
 import hklimatxt from '../img/klima text.png';
 import rerend from '../img/rerend logo.png';
@@ -24,75 +25,77 @@ const Homepage = () => {
 
   return (
     <div className="background_homepage">
-      <div className="centered_container">
-        <img src={hklimatxt} alt="KLIMA Logo" className="title_img" />
-        <h1 className='subtitle'>Act Now for Nature – A Future Worth Protecting</h1>
+      <div className="hcentered_container">
+        <img src={hklimatxt} alt="KLIMA Logo" className="htitle_img" />
+        <h1 className='hsubtitle'>Act Now for Nature – A Future Worth Protecting</h1>
 
         {/* Download Button */}
         <a href="/login">
-          <button className="dl_button">
-            <img src={download} alt="Download" className="button_img" />
+          <button className="hdl_button">
+            <img src={download} alt="Download" className="hbutton_img" />
           </button>
         </a>
+
+        <div className='hscroll'>
+          <img src={scroll} alt="Scroll" className="hscroll_img" />
+        </div>
       </div>
 
       {/* Game Information Section */}
-      <div className="main_container">
-        <div className="game_info">
-          <h2 className="game_title">About the Game</h2>
-          <p className="game_description">
+      <div className="hmain_container">
+        <div className="hgame_info_section">
+          <h2 className="hgame_title">About the Game</h2>
+          <p className="hgame_description">
             <strong>KLIMA</strong> invites you into a vibrant, 3D mini-world where every choice counts. As you explore this spherical environment, you’ll encounter real-life climate scenarios, like rising sea levels, deforestation, and pollution, that bring the challenges of climate change to life. It’s not just a game; it’s a journey to see the impact of your choices on the planet.
           </p>
-          <p className="game_description">
+          <br></br>
+          <p className="hgame_description">
             Each level immerses you in a different climate situation, where fast decisions show the direct effects of your actions on this mini-world. You’ll gain insights into the ripple effects of climate issues—how one action can change everything. By learning from realistic scenarios based on real-world data, you’ll come away with a better understanding of how our everyday choices shape the environment around us.
           </p>
-          <p className="game_description">
+          <br></br>
+          <p className="hgame_description">
             In <strong>KLIMA</strong>, it’s all about learning through doing. You’ll walk away with a richer perspective on climate change, understanding both the issues and the solutions needed to make a difference.
           </p>
         </div>
 
         {/* About Us Section */}
-        <div className="about_us">
-          <h2 className="section_title">Meet Our Team</h2>
-          <div className="developer_profiles">
-            {/* Developer Profile 1 */}
-            <div className="developer_card">
-              <img src={developer1} alt="Developer 1" className="developer_photo dev1" />
-              <h3 className="developer_name">Developer 1</h3>
-              <p className="developer_role">Role: Lead Developer</p>
+        <div className="habout_us_section" id='aboutUs'>
+          <h2 className="hdev_title">Meet Our Team</h2>
+          <div className="hdeveloper_profiles">
+            <div className="hdeveloper_card">
+              <img src={developer1} alt="Developer 1" className="hdeveloper_photo hdev1" />
+              <h3 className="hdeveloper_name">Shannen</h3>
+              <p className="hdeveloper_role">PROJECT MANAGER</p>
             </div>
 
-            {/* Developer Profile 2 */}
-            <div className="developer_card">
-              <img src={developer2} alt="Developer 2" className="developer_photo dev2" />
-              <h3 className="developer_name">Developer 2</h3>
-              <p className="developer_role">Role: UI/UX Designer</p>
+            <div className="hdeveloper_card">
+              <img src={developer2} alt="Developer 2" className="hdeveloper_photo hdev2" />
+              <h3 className="hdeveloper_name">Vinnie</h3>
+              <p className="hdeveloper_role">SYSTEM ADMINISTRATOR</p>
             </div>
 
-            {/* Developer Profile 3 */}
-            <div className="developer_card">
-              <img src={developer3} alt="Developer 3" className="developer_photo dev3" />
-              <h3 className="developer_name">Developer 3</h3>
-              <p className="developer_role">Role: Backend Developer</p>
+            <div className="hdeveloper_card">
+              <img src={developer3} alt="Developer 3" className="hdeveloper_photo hdev3" />
+              <h3 className="hdeveloper_name">Jere Mane</h3>
+              <p className="hdeveloper_role">BACKEND DEVELOPER</p>
             </div>
 
-            {/* Developer Profile 4 */}
-            <div className="developer_card">
-              <img src={developer4} alt="Developer 4" className="developer_photo dev4" />
-              <h3 className="developer_name">Developer 4</h3>
-              <p className="developer_role">Role: Project Manager</p>
+            <div className="hdeveloper_card">
+              <img src={developer4} alt="Developer 4" className="hdeveloper_photo hdev4" />
+              <h3 className="hdeveloper_name">Kyan</h3>
+              <p className="hdeveloper_role">FRONTEND DEVELOPER</p>
             </div>
           </div>
         </div>
 
         {/* Partner Section */}
-        <div className="partners_section">
-          <h2 className="section_title">Our Partner</h2>
-          <div className="partner_card">
-            <img src={gp2} alt="Partner Logo" className="partner_logo" />
-            <p className="partner_info">
+        <div className="hpartners_section" id='ourPartner'>
+          <h2 className="hpartner_title">Our Partner</h2>
+          <div className="hpartner_card">
+            <img src={gp2} alt="Partner Logo" className="hpartner_logo" />
+            <p className="hpartner_info">
               Greenpeace is a community united by a mission to protect the planet and ensure a green, peaceful future. We’ve led the fight against environmental destruction, advocating for the planet’s rights as part of a global movement that challenges power with courage.
-              <a className="gp_link" href="https://www.greenpeace.org/philippines/about-us/">Know more</a>
+              &nbsp;<a className="hgp_link" href="https://www.greenpeace.org/philippines/about-us/">Know more</a>
             </p>
           </div>
         </div>
@@ -100,23 +103,23 @@ const Homepage = () => {
         {/* Footer */}
         <footer className="hfooter">
           <div className="hfooter_container">
-            <a href="#" className="footer_link" onClick={openPrivacyModal}>Privacy Policy</a>
-            <a href="#" className="footer_link" onClick={openTermsModal}>Terms of Service</a>
-            <a href="#" className="footer_link">About Us</a>
-            <a href="#" className="footer_link">Our Partner</a>
+            <a href="#" className="hfooter_link" onClick={openPrivacyModal}>Privacy Policy</a>
+            <a href="#" className="hfooter_link" onClick={openTermsModal}>Terms of Service</a>
+            <a href="#aboutUs" className="hfooter_link">About Us</a>
+            <a href="#ourPartner" className="hfooter_link">Our Partner</a>
             <p className="hfooter_copy">&#169; KLIMA 2024 | All rights reserved.</p>
-            <img src={gp} alt="Bottom Left" className="bottom_left" />
-            <img src={rerend} alt="Bottom Mid" className="bottom_mid" />
-            <img src={klimalogo} alt="Bottom Right" className="bottom_right" />
+            <img src={gp} alt="Bottom Left" className="hbottom_left" />
+            <img src={rerend} alt="Bottom Mid" className="hbottom_mid" />
+            <img src={klimalogo} alt="Bottom Right" className="hbottom_right" />
           </div>
         </footer>
 
         {/* Privacy Policy Modal */}
         {isPrivacyModalOpen && (
-          <div className="modal">
-            <div className="modal_content">
-              <span className="close" onClick={closePrivacyModal}>&times;</span>
-              <div className="scrollable_content">
+          <div className="hmodal">
+            <div className="hmodal_content">
+              <span className="fclose" onClick={closePrivacyModal}>&times;</span>
+              <div className="hscrollable_content">
                 <h1>Privacy Policy</h1>
                 <p>
                   KLIMA is dedicated to protecting the privacy of our users and ensuring a secure gaming experience. This Privacy Policy outlines the types of personal information we collect, how it is used, stored, and protected, as well as your rights regarding your data.
@@ -153,7 +156,7 @@ const Homepage = () => {
 
                 <h2>6. User Rights:</h2>
                 <p>
-                  You have the right to access, correct, or delete any personal data we hold about you. If you wish to exercise these rights, please contact us at [Insert Contact Email].
+                  You have the right to access, correct, or delete any personal data we hold about you. If you wish to exercise these rights, please contact us at <strong>klima.rerend@gmail.com</strong>.
                 </p>
                 <p>
                   You also have the right to withdraw your consent at any time where we are relying on your consent to process your personal information.
@@ -181,8 +184,8 @@ const Homepage = () => {
         {isTermsModalOpen && (
           <div className="hmodal">
             <div className="hmodal_content">
-              <span className="close" onClick={closeTermsModal}>&times;</span>
-              <div className="scrollable_content">
+              <span className="fclose" onClick={closeTermsModal}>&times;</span>
+              <div className="hscrollable_content">
                 <h1>Terms of Service</h1>
                 <p>These Terms and Conditions govern your access to and use of <strong>KLIMA</strong>, an interactive game designed to educate players about climate change through engaging gameplay and real-world scenarios.</p>
 

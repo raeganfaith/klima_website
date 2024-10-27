@@ -4,16 +4,15 @@ import { connectDB } from "./config/db.js";
 import User from "./models/user.model.js";
 import bodyParser from "body-parser";
 import cors from "cors";
-import bcrypt from "bcryptjs";
 import nodemailer from "nodemailer";
-import crypto from "crypto";
+import crypto from "crypto"; // Keep crypto for hashing and OTP
 import fs from "fs/promises";
 import jwt from "jsonwebtoken";
 dotenv.config();
 
 const otpStore = {};
 const app = express();
-const secretKey = process.env.JWT_SECRET || "your_secret_key";  // Add secretKey for JWT
+const secretKey = process.env.JWT_SECRET || "your_secret_key"; // Add secretKey for JWT
 
 // Middleware
 app.use(cors());
@@ -43,21 +42,6 @@ function authenticateToken(req, res, next) {
   });
 }
 
-// Middleware to read and verify token from token.txt
-const verifyTokenFromFile = (req, res, next) => {
-  const tokenFilePath = "./public/Game/Token/token.txt";
-
-  fs.readFile(tokenFilePath, "utf8", (err, token) => {
-    if (err) return res.status(500).json({ message: "Error reading token file" });
-
-    jwt.verify(token, secretKey, (err, decoded) => {
-      if (err) return res.status(401).json({ message: "Invalid or expired token" });
-      req.user = decoded;
-      next();
-    });
-  });
-};
-
 // Signup Route
 app.post("/api/signup", async (req, res) => {
   const { username, email, password } = req.body;
@@ -72,14 +56,34 @@ app.post("/api/signup", async (req, res) => {
       return res.status(400).json({ message: "Username is taken" });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
+    // Hash password with SHA-256
+    const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
     const newUser = new User({ username, email, password: hashedPassword });
     await newUser.save();
 
-    const token = jwt.sign({ userId: newUser._id }, secretKey, { expiresIn: "24h" });
+    // Generate and send OTP
+    const otp = generateOtp();
+    otpStore[email] = { otp, expires: Date.now() + 10 * 60 * 1000 }; // Store OTP with expiry
+    await transporter.sendMail({
+      from: process.env.EMAIL_USER, // use your environment variable for email
+      to: email,
+      subject: 'KLIMA | Your One-Time Password (OTP) Code for Secure Access',
+      html: `<p>To ensure the security of your account, we require you to enter a One-Time Password (OTP) to verify your email.</p>
 
-    res.status(201).json({ message: "User registered successfully", token });
+<p><strong>Your OTP code is: ${otp}</strong></p>
+
+<p>Please enter this code in the required field to continue. This OTP is valid for the next 10 minutes and can only be used once. If you did not request this OTP or believe this email was sent to you in error, please disregard it.</p>
+
+<p>For your security, please do not share this OTP with anyone.</p>
+
+<p><em>***This is a system generated message. <strong>DO NOT REPLY TO THIS EMAIL.</strong>***</em></p>`
+    });
+
+    const token = jwt.sign({ userId: newUser._id }, secretKey, { expiresIn: "1h" });
+
+    res.status(201).json({ message: "User registered successfully. OTP sent to email.", token });
   } catch (error) {
+    console.error("Signup error:", error);
     res.status(500).json({ message: "Signup failed" });
   }
 });
@@ -100,12 +104,19 @@ app.post('/api/login', async (req, res) => {
     });
 
     // Check if user exists and if password matches
-    if (user && await bcrypt.compare(password, user.password)) {
-      // Create token with user ID
-      const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '24h' });
+    if (user) {
+      // Hash the provided password with SHA-256 for comparison
+      const hashedPassword = crypto.createHash('sha256').update(password).digest('hex');
 
-      // Respond with success message and token
-      res.status(200).json({ message: 'Login successful', token });
+      if (hashedPassword === user.password) {
+        // Create token with user ID
+        const token = jwt.sign({ userId: user._id }, secretKey, { expiresIn: '1h' });
+
+        // Respond with success message and token
+        res.status(200).json({ message: 'Login successful', token });
+      } else {
+        res.status(401).json({ message: 'Invalid credentials' });
+      }
     } else {
       res.status(401).json({ message: 'Invalid credentials' });
     }
@@ -115,7 +126,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
-// Get user data
+// Get Username
 app.get('/api/user', authenticateToken, async (req, res) => {
   try {
     const user = await User.findById(req.user.userId).select('-password'); // Exclude the password
@@ -126,11 +137,6 @@ app.get('/api/user', authenticateToken, async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: 'Failed to fetch user data' });
   }
-});
-
-// Validate token endpoint
-app.get("/api/validate-token", authenticateToken, (req, res) => {
-  res.status(200).json({ message: "Token is valid" });
 });
 
 // Change password
@@ -148,7 +154,8 @@ app.post("/api/change-password", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    const hashedPassword = await bcrypt.hash(newPassword, 10);
+    // Hash new password with SHA-256
+    const hashedPassword = crypto.createHash('sha256').update(newPassword).digest('hex');
     user.password = hashedPassword;
     await user.save();
 
@@ -173,28 +180,37 @@ const generateOtp = () => {
 };
 
 // Send OTP
-app.post("/api/send-otp", async (req, res) => {
+app.post('/api/send-otp', async (req, res) => {
   const { email } = req.body;
 
   if (!email) {
-    return res.status(400).json({ message: "Email is required" });
+      return res.status(400).json({ message: 'Email is required' });
   }
 
   try {
-    const otp = generateOtp();
-    otpStore[email] = { otp, expires: Date.now() + 10 * 60 * 1000 };
+      const otp = generateOtp();
+      otpStore[email] = { otp, expires: Date.now() + 10 * 60 * 1000 }; 
 
-    const mailOptions = {
-      from: "klima.otp@gmail.com",
-      to: email,
-      subject: "Your One-Time Password (OTP)",
-      html: `<p>Your OTP code is: ${otp}</p>`,
-    };
+      const mailOptions = {
+          from: 'your-email@gmail.com',
+          to: email,
+          subject: 'KLIMA | Your One-Time Password (OTP) Code for Secure Access',
+          html: `<p>To ensure the security of your account, we require you to enter a One-Time Password (OTP) to proceed with your request.</p>
 
-    await transporter.sendMail(mailOptions);
-    res.status(200).json({ message: "OTP sent successfully" });
+<p><strong>Your OTP code is: ${otp}</strong></p>
+
+<p>Please enter this code in the required field to continue. This OTP is valid for the next 10 minutes and can only be used once. If you did not request this OTP or believe this email was sent to you in error, please disregard it.</p>
+
+<p>For your security, please do not share this OTP with anyone.</p>
+
+<p><em>***This is a system generated message. <strong>DO NOT REPLY TO THIS EMAIL.</strong>***</em></p>`,
+      };
+
+      await transporter.sendMail(mailOptions);
+      res.status(200).json({ message: 'OTP sent successfully' });
   } catch (error) {
-    res.status(500).json({ message: "Failed to send OTP" });
+      console.error('Error sending OTP:', error);
+      res.status(500).json({ message: 'Failed to send OTP' });
   }
 });
 

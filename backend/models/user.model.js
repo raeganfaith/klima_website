@@ -68,13 +68,14 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  isLogin: {
+    type: Boolean,
+    default: 0,
+  }
 });
 
-// Product model, create a collection labelled as "Product" using the productSchema
-// The "Product" will automatically renamed to "products" in the MongoDB
 const User = mongoose.model("User", userSchema);
 
-// To use this in different files
 export default User;
 
-// module.exports = mongoose.model('User', UserSchema);
+

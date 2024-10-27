@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
-import klimalogo from '../img/klima logo.png';
-import klimatxt from '../img/klima text.png';
-import rerend from '../img/rerend logo.png';
+import { useNavigate } from 'react-router-dom'; 
 import '../css/changepass.css';
 
 const ChangePassword = () => {
@@ -48,13 +45,11 @@ const ChangePassword = () => {
 
     const handleModalClose = () => {
         setModalOpen(false);
-        navigate('/'); // Redirect to homepage after closing the modal
+        navigate('/login'); // Redirect to login after closing the modal
     };
 
     return (
         <div className="background_changepass">
-
-            <img src={klimatxt} alt="Top Left" className="corner_img top_left" />
 
             <div className="change_pass">
                 <h2 className="change_pass_title">Change Password</h2>
@@ -100,18 +95,6 @@ const ChangePassword = () => {
                     </div>
                 </div>
             )}
-
-            <footer className="footer">
-                <div className="footer_container">
-                    <p className="footer_copy">
-                        &#169; KLIMA 2024 | All rights reserved.
-                    </p>
-                    {/* logos */}
-                    <img src={rerend} alt="Bottom Left" className=" bottom_left" />
-                    <img src={klimalogo} alt="Bottom Right" className=" bottom_right" />
-                    
-                </div>
-            </footer>
             
         </div>
     );

@@ -7,6 +7,26 @@
   font-family: "Montserrat", sans-serif;
 }
 
+body {
+  overflow-y: scroll; 
+  scrollbar-width: none; /* Firefox */
+}
+
+body::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+body {
+  opacity: 0;
+  animation: fadeIn 1.5s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
 body,
 html {
   height: 100%;
@@ -24,7 +44,7 @@ html {
   min-height: 100vh;
 }
 
-.centered_container {
+.hcentered_container {
   text-align: center;
   background-image: url("../img/klima\ main\ bg.png"); 
   background-size: cover; 
@@ -38,19 +58,36 @@ html {
   justify-content: center; 
 }
 
-.title_img {
+@keyframes scrollIndicator {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(10px);
+    opacity: 0.5;
+  }
+}
+
+.hscroll_img {
+  margin-top: 50%;
+  width: 60px;
+  animation: scrollIndicator 1.5s infinite ease-in-out;
+}
+
+.htitle_img {
   margin-top: -30%;
   width: 400px;
 }
 
-.subtitle {
+.hsubtitle {
   font-weight: 400;
   font-size: 20px;
   color: white;
 }
 
 /*download button*/
-.dl_button {
+.hdl_button {
   margin-top: 15%;
   border: none; 
   background: transparent; 
@@ -60,17 +97,17 @@ html {
   z-index: 3;
 }
 
-.button_img {
+.hbutton_img {
   width: 300px; 
   height: auto; 
   transition: transform 0.3s ease; 
 }
 
-.dl_button:hover .button_img {
+.hdl_button:hover .hbutton_img {
   transform: scale(1.1);
 }
 
-.main_container {
+.hmain_container {
   min-height: 100vh; 
   width: 100vw; 
   display: flex; 
@@ -82,7 +119,7 @@ html {
 
 /* HOMEPAGE - Game info */
 
-.game_info {
+.hgame_info_section {
   text-align: center;  
   margin-top: 2%;
   padding: 300px 300px; 
@@ -90,15 +127,15 @@ html {
   width: 100vw;  
 }
 
-.game_title {
+.hgame_title {
   color: #197134;
   font-size: 100px;
   margin-bottom: 5%; 
 }
 
-.game_description {
+.hgame_description {
   color: #FCF9C6;
-  font-size: 30px;
+  font-size: 20px;
   line-height: 2; 
   padding-left: 200px;
   padding-right: 200px;
@@ -106,7 +143,7 @@ html {
 
 /* HOMEPAGE - About us */
 
-.about_us {
+.habout_us_section {
   margin-top: 2%;
   padding: 20px 20px;
   width: 100vw;  
@@ -114,22 +151,22 @@ html {
   background-color: #18161634;
 }
 
-.section_title {
+.hdev_title {
   margin-top: 5%;
   font-size: 100px;
   margin-bottom: 100px;
-  color: #181616;
+  color: #FCF9C6;
 }
 
-.developer_profiles {
+.hdeveloper_profiles {
   display: flex;
   gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
 }
 
-.developer_card {
-  width: 450px;
+.hdeveloper_card {
+  width: 400px;
   margin-bottom: 5%;
   text-align: center;
   background: #FCF9C6;
@@ -138,21 +175,21 @@ html {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
 }
 
-.developer_photo {
+.hdeveloper_photo {
   width: 200px;
   height: auto;
   border-radius: 50%;
   margin-bottom: 10px;
 }
 
-.developer_name {
+.hdeveloper_name {
   color: #424D0C;
-  font-size: 40px;
+  font-size: 30px;
   margin-bottom: 5%;
   font-weight: bold;
 }
 
-.developer_role {
+.hdeveloper_role {
   font-weight: 500;
   font-size: 20px;
   color: #666;
@@ -160,22 +197,29 @@ html {
 
 /* HOMEPAGE - Partners */
 
-.gp_link {
+.hgp_link {
   color: #197134;
 }
 
-.gp_link:hover {
+.hgp_link:hover {
   color: #7da02e;
 }
 
-.partners_section {
+.hpartners_section {
   margin-top: 10%;
   margin-bottom: 20%;
   padding: 40px 0;
   text-align: center;
 }
 
-.partner_card {
+.hpartner_title {
+  margin-top: 5%;
+  font-size: 100px;
+  margin-bottom: 100px;
+  color: #181616;
+}
+
+.hpartner_card {
   width: 1500px;
   margin: 0 auto;
   padding: 150px;
@@ -185,26 +229,26 @@ html {
   text-align: center;
 }
 
-.partner_logo {
-  width: 800px;
+.hpartner_logo {
+  width: 600px;
   height: auto;
   margin-bottom: 5%;
 }
 
-.partner_info {
-  font-size: 35px;
+.hpartner_info {
+  font-size: 20px;
   color: #333;
 }
 
 /* FOOTER */
 
-.footer_link {
+.hfooter_link {
   margin: 0 10px;
   color: #FFFFFF; 
   text-decoration: none;
 }
 
-.footer_link:hover {
+.hfooter_link:hover {
   text-decoration: underline;
 }
 
@@ -229,7 +273,7 @@ html {
 }
 
 /* LOGOS */
-.bottom_left {
+.hbottom_left {
   bottom: 0;
   right: 0;
   margin: 10px;
@@ -237,7 +281,7 @@ html {
   height: 50px;
 }
 
-.bottom_right, .bottom_mid {
+.hbottom_right, .hbottom_mid {
   bottom: 0;
   right: 0;
   margin: 10px;
@@ -245,7 +289,7 @@ html {
   height: 50px;
 }
 
-.bottom_left, .bottom_right {
+.hbottom_left, .hbottom_right {
   margin: 10px;
 }
 
@@ -264,7 +308,7 @@ html {
 }
 
 .hmodal_content {
-  background-color: #fff;
+  background-color: #E0DECA;
   padding: 40px;
   border-radius: 5px;
   width: 100%;
@@ -276,7 +320,7 @@ html {
   flex-direction: column; 
 }
 
-.scrollable_content {
+.hscrollable_content {
   overflow-y: auto;
   flex-grow: 1; 
   padding-right: 10px; 
@@ -284,10 +328,30 @@ html {
   text-align: left;
 }
 
-.close {
+/* Customize the scrollbar in the modal */
+.hscrollable_content {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: #197134 #E0DECA; 
+}
+
+.hscrollable_content::-webkit-scrollbar {
+  width: 8px; 
+}
+
+.hscrollable_content::-webkit-scrollbar-thumb {
+  background-color: #197134;
+  border-radius: 10px; 
+}
+
+.hscrollable_content::-webkit-scrollbar-track {
+  background-color: #E0DECA; 
+}
+
+.fclose {
   position: absolute;
-  top: -25px;
-  right: 10px;
+  top: -35px;
+  right: 30px;
   font-size: 50px;
   cursor: pointer;
+  color: #197134;
 }
